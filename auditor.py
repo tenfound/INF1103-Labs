@@ -11,7 +11,6 @@ while 1:
         break
     
     # 3.Accept stock values as integers.
-    print(Inventory)
     stock = input("Stock value: ")
 
     if stock.isdigit() == True: # Checks if is number
