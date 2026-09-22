@@ -26,8 +26,7 @@ def get_valid_input():
             else:   # When stock value is valid 
                 # inventoryList.append(stock)
                 Inventory = process_delivery(Inventory, stock)      # Keeps running total of inventory
-                calculate_tax(stock)
-        
+                calculate_tax(stock)    # Calculates tax for delivery
         else:   # 4. If not number
             if stock == "quit" or stock == "Quit":
                 end_run = 1
@@ -65,8 +64,3 @@ Inventory, rejected_list = get_valid_input()
 
 # 8. Reporting
 generate_report(Inventory, rejected_list)
-
-
-
-
-
