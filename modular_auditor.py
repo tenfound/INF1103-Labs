@@ -64,3 +64,7 @@ Inventory, rejected_list = get_valid_input()
 
 # 8. Reporting
 generate_report(Inventory, rejected_list)
+
+# Self Reflection:
+# Returning tax amount allows us to easily access that value without having to do the calculations again if we need it outside the function.
+# However, since we were not told to use the tax amount outside the function, I printed the tax value directly in the function.
