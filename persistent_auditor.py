@@ -15,16 +15,12 @@
 # Maintain your functional design. Create a load_inventory() and save_inventory() function
 
 # get_valid_input(): Handles prompt, input validation & returns valid integer or "quit" signal
-def get_valid_input(id_count):
+def get_valid_input():
     end_run = 0
     Inventory = 0
     transaction_list = []
     rejected_list= []
-
-    if id_count == "":
-        id_count = 1000
-    else:
-        id_count = int(id_count)
+    id_count = 1000
 
     while end_run != 1:
         if Inventory == 500:    # Overstock alert
@@ -84,9 +80,6 @@ def load_inventory():  # Read records in file
     with open("inventory.txt", "r") as file:
         orders = file.readlines()
         print(orders)   # display orders
-        for order in orders:
-            columns = order.strip().split(",")
-            id = columns[0]
     file.close()
 
     return id
@@ -98,9 +91,9 @@ def save_inventory(new_order):  # Write records to file
     print("Successfully saved to inventory.txt")
 
 # load inventory on startup
-id = load_inventory()
+load_inventory()
 
-Inventory, rejected_list = get_valid_input(id)
+Inventory, rejected_list = get_valid_input()
 # calculate_tax(Inventory)
 
 # 8. Reporting
