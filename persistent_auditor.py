@@ -14,24 +14,25 @@
 # 4. Modularity:
 # Maintain your functional design. Create a load_inventory() and save_inventory() function
 
-
-# Commit your progress after you successfully complete each phase:
-# a. After load_inventory() is working.
-# b. After the list is successfully tracking history.
-# c. After the final save_inventory() is verified.
-
 # get_valid_input(): Handles prompt, input validation & returns valid integer or "quit" signal
-def get_valid_input():
+def get_valid_input(id_count):
     end_run = 0
     Inventory = 0
-    # inventory_list = []
+    transaction_list = []
     rejected_list= []
+
+    if id_count == "":
+        id_count = 1000
+    else:
+        id_count = int(id_count)
+
     while end_run != 1:
         if Inventory == 500:    # Overstock alert
             print("Inventory full!")
             end_run = 1
 
-        stock = input("Stock value: ")
+        name = input("Enter product name: ")
+        stock = input("Enter quantity: ")
 
         if stock.isdigit() == True: # Checks if is number
         
@@ -43,6 +44,11 @@ def get_valid_input():
                 # inventoryList.append(stock)
                 Inventory = process_delivery(Inventory, stock)      # Keeps running total of inventory
                 calculate_tax(stock)    # Calculates tax for delivery
+
+                transaction_list = [id_count, name, stock]
+                save_inventory(transaction_list)   # saves transaction to inventory.txt file
+                id_count += 1
+
         else:   # 4. If not number
             if stock.lower() == "quit":
                 end_run = 1
@@ -74,8 +80,27 @@ def generate_report(total_units, failed_attempts):
     # print("Value of items in inventory:", total_value)
     print("Rejected item values:", failed_attempts)
 
+def load_inventory():  # Read records in file
+    with open("inventory.txt", "r") as file:
+        orders = file.readlines()
+        print(orders)   # display orders
+        for order in orders:
+            columns = order.strip().split(",")
+            id = columns[0]
+    file.close()
 
-Inventory, rejected_list = get_valid_input()
+    return id
+
+def save_inventory(new_order):  # Write records to file
+    with open("inventory.txt", "a") as file:
+        file.write(str(new_order) + "\n")
+    file.close()
+    print("Successfully saved to inventory.txt")
+
+# load inventory on startup
+id = load_inventory()
+
+Inventory, rejected_list = get_valid_input(id)
 # calculate_tax(Inventory)
 
 # 8. Reporting
