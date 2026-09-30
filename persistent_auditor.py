@@ -44,7 +44,7 @@ def get_valid_input():
                 Inventory = process_delivery(Inventory, stock)      # Keeps running total of inventory
                 calculate_tax(stock)    # Calculates tax for delivery
         else:   # 4. If not number
-            if stock == "quit" or stock == "Quit":
+            if stock.lower() == "quit":
                 end_run = 1
             else:
                 rejected_list.append(stock)
