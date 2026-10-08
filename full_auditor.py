@@ -26,20 +26,23 @@ def update_stock(stock_list, new_stock):
 
 def display_all(s_list):
     for item in s_list:
-        print(item)
+        print (f"ID: {item['ID']}, Name: {item['Name']}, Price: {item['Price']}, Stock: {item['Stock']}")
     if len(s_list) == 0:
-        empty_variable = "No products in inventory."
-        return empty_variable
+        print("No products in inventory.")
 
-# def load_inventory():
+def load_inventory():
+    with open("inventory.json", "r") as f:
+        loaded_inventory = json.load(f)
+    return loaded_inventory
 
 def save_inventory(inventory):
     with open("inventory.json", "w") as f:
-        json.dump(inventory, f)
+        json.dump(inventory, f, indent=4)
 
 continue_run = True
 stock_list = []
 product = []
+choice_list = []
 
 print("1. Display all products")
 print("2. Add product")
@@ -50,13 +53,20 @@ print("6. Exit")
 
 while continue_run == True:
 
+    
     choice = input("Enter your choice: ")
-    print(choice)
+    choice_list.append(choice)
+    # print(choice_list)
+    # print(choice)
     if choice == "1":
         print("Current Inventory")
-        result = display_all(stock_list)  # product stored as type dictionary
-        if result == "No products in inventory.":
-            print(result)
+        # result = display_all(stock_list)  # product stored as type dictionary
+        # if result == "No products in inventory.":
+        #     print(result)
+        # else:
+        #     for item in result:
+        #         print(item)
+        display_all(stock_list)  # product stored as type dictionary
 
     elif choice == "2":
         print("Add new product")
@@ -70,12 +80,17 @@ while continue_run == True:
     elif choice == "4":
         print("Search product")
         product_id = input("Enter product ID: ")
+        loaded_inventory = load_inventory()
+        print(loaded_inventory)
 
     elif choice == "5":
         print("Save inventory")
+        save_inventory(stock_list)  # product stored as type dictionary
 
     elif choice == "6":
-        print("Saving inventory before exiting...")
+        if '5' not in choice_list:
+            print("Saving inventory before exiting...")
+            save_inventory(stock_list)
         print("Thank you for using Inventory Management System.\n")
         print("Program terminated.")
 
