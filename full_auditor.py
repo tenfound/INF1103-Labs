@@ -81,14 +81,16 @@ while continue_run == True:
         print("Search product")
         product_id = input("Enter product ID: ")
         loaded_inventory = load_inventory()
-        print(loaded_inventory)
+        for list_item in loaded_inventory:
+            if list_item["ID"] == product_id:
+                print(f"Product found: ID: {list_item['ID']}, Name: {list_item['Name']}, Price: {list_item['Price']}, Stock: {list_item['Stock']}")
 
     elif choice == "5":
         print("Save inventory")
         save_inventory(stock_list)  # product stored as type dictionary
 
     elif choice == "6":
-        if '5' not in choice_list:
+        if '5' not in choice_list and len(stock_list) > 0:
             print("Saving inventory before exiting...")
             save_inventory(stock_list)
         print("Thank you for using Inventory Management System.\n")
