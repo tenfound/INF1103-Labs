@@ -22,7 +22,13 @@ def update_stock(stock_list, new_stock):
     print("Stock updated successfully!")
     return stock_list
 
-# def search_product():
+def search_product(loaded_inventory, product_id):
+    loaded_list = []
+    for list_item in loaded_inventory:
+        if list_item["ID"] == product_id:
+            # print(f"Product found: ID: {list_item['ID']}, Name: {list_item['Name']}, Price: {list_item['Price']}, Stock: {list_item['Stock']}")
+            loaded_list.append(list_item)
+    return loaded_list
 
 def display_all(s_list):
     for item in s_list:
@@ -42,7 +48,6 @@ def save_inventory(inventory):
 continue_run = True
 stock_list = []
 product = []
-choice_list = []
 
 print("1. Display all products")
 print("2. Add product")
@@ -55,43 +60,40 @@ while continue_run == True:
 
     
     choice = input("Enter your choice: ")
-    choice_list.append(choice)
-    # print(choice_list)
-    # print(choice)
+
     if choice == "1":
-        print("Current Inventory")
-        # result = display_all(stock_list)  # product stored as type dictionary
-        # if result == "No products in inventory.":
-        #     print(result)
-        # else:
-        #     for item in result:
-        #         print(item)
+        print("\nCurrent Inventory")
+        print("=================")
         display_all(stock_list)  # product stored as type dictionary
 
     elif choice == "2":
-        print("Add new product")
+        print("\nAdding new product")
         product = add_product()     # product stored as type dictionary
         print("Product added successfully!")
 
     elif choice == "3":
-        print("Update stock")
+        print("\nUpdating stock")
         stock_list = update_stock(stock_list, product)  # product stored as type dictionary
 
     elif choice == "4":
-        print("Search product")
+        print("\nSearching product")
         product_id = input("Enter product ID: ")
         loaded_inventory = load_inventory()
-        for list_item in loaded_inventory:
-            if list_item["ID"] == product_id:
-                print(f"Product found: ID: {list_item['ID']}, Name: {list_item['Name']}, Price: {list_item['Price']}, Stock: {list_item['Stock']}")
+        loaded_list = search_product(loaded_inventory, product_id)
+
+        for item in loaded_list:
+            if len(loaded_list) == 0:
+                print("Product not found.")
+            else:
+                print (f"ID: {item['ID']}, Name: {item['Name']}, Price: {item['Price']}, Stock: {item['Stock']}")
 
     elif choice == "5":
-        print("Save inventory")
+        print("\nSaving inventory")
         save_inventory(stock_list)  # product stored as type dictionary
 
     elif choice == "6":
-        if '5' not in choice_list and len(stock_list) > 0:
-            print("Saving inventory before exiting...")
+        if len(stock_list) > 0:     # Only saves if there are products in the stock list
+            print("\nSaving inventory before exiting...")
             save_inventory(stock_list)
         print("Thank you for using Inventory Management System.\n")
         print("Program terminated.")
