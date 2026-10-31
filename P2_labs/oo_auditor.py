@@ -45,12 +45,12 @@ class Inventory():
     def inventory_length(self):
         if len(self.__products) == 0:
             return "empty"
-    
+
+
 def main():
     inventory = Inventory()
-    continue_run = True
     # product = Product()
-
+    
     print("1. Display all products")    # Display all products in current session
     print("2. Add product")     # Add to new product of class Product
     print("3. Update stock")    # Update inventory
@@ -58,7 +58,7 @@ def main():
     print("5. Save inventory")  # Write to json
     print("6. Exit")
 
-    while continue_run == True:
+    while True:
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -98,9 +98,7 @@ def main():
             print("Thank you for using Inventory Management System.\n")
             print("Program terminated.")
 
-            continue_run = False
+            return False
 
-    return False    # Terminate condition
-
-while True:
+if __name__ == "__main__":
     main()
