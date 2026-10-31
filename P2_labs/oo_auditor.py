@@ -104,7 +104,7 @@ def main():
             stock = Product.get_stock()
             product = Product(id, name, price, stock)
 
-            print("Product added successfully!")
+            print("Product added successfully!\n")
 
         elif choice == "3":
             print("\nUpdating stock")
