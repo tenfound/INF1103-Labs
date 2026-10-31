@@ -2,7 +2,7 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY full_auditor.py .
-COPY inventory.json .
+COPY P2_labs/oo_auditor.py .
+COPY inventory2.json .
 
-CMD ["python", "full_auditor.py"]
+CMD ["python", "oo_auditor.py"]

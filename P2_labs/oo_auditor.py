@@ -21,6 +21,14 @@ class Product():
 
     def get_product_id(self):
         return self.__productid
+
+    def to_dict(self):
+        return {
+            "ID" : self.__productid,
+            "Name" : self.__name,
+            "Price" : self.__price,
+            "Stock" : self.__stock
+        }
     
 class Inventory():
     def __init__(self):
@@ -39,8 +47,8 @@ class Inventory():
         for p in self.__products:
             print(p)
     def save_inventory(self):
-        with open("storage.json", "w") as f:
-                json.dump(self.__products, f, indent=4)
+        with open("inventory2.json", "w") as f:
+                json.dump([x.to_dict() for x in self.__products], f, indent=4)
 
     def inventory_length(self):
         if len(self.__products) == 0:
