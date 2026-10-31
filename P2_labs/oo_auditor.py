@@ -29,23 +29,46 @@ class Product():
             "Price" : self.__price,
             "Stock" : self.__stock
         }
+
+    @classmethod
+    def from_dict(cls, item):
+        return cls(
+            item["ID"], 
+            item["Name"], 
+            item["Price"], 
+            item["Stock"]
+        )
+
+    def __str__(self):      # Enables user to read actual values when printing class
+        return (f"Product ID: {self.__productid}, Product Name: {self.__name}, Price: ${self.__price}, Stock: {self.__stock}")
     
 class Inventory():
     def __init__(self):
         self.__products = []
+        self.__past_products = []
 
+    def load_inventory(self):
+        with open("inventory2.json", "r") as f:
+            loaded_inventory = json.load(f)
+        return loaded_inventory
+    
     def add_product(self, product):
         self.__products.append(product)
         
     def search_product(self, searched_product_id):
-        for product in self.__products:
-            if product.get_product_id == searched_product_id:
+        data = self.load_inventory()
+        self.__past_products = [Product.from_dict(item) for item in data]
+        for product in self.__past_products:
+            if product.get_product_id() == searched_product_id:
                 return product
-            else:
-                print("Product not found")
+        print("Product not found")
+        return None
+
     def display_all(self):
-        for p in self.__products:
+        self.__past_products = self.load_inventory()
+        for p in self.__past_products:
             print(p)
+
     def save_inventory(self):
         with open("inventory2.json", "w") as f:
                 json.dump([x.to_dict() for x in self.__products], f, indent=4)
@@ -58,15 +81,15 @@ class Inventory():
 def main():
     inventory = Inventory()
     # product = Product()
-    
-    print("1. Display all products")    # Display all products in current session
-    print("2. Add product")     # Add to new product of class Product
-    print("3. Update stock")    # Update inventory
-    print("4. Search product")  # Search for product id in records
-    print("5. Save inventory")  # Write to json
-    print("6. Exit")
 
     while True:
+        print("1. Display all products")    # Display all products in inventory2.json
+        print("2. Add product")     # Add to new product of class Product
+        print("3. Update stock")    # Update inventory
+        print("4. Search product")  # Search for product id in inventory2.json
+        print("5. Save inventory")  # Write to json
+        print("6. Exit")
+        
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -91,6 +114,7 @@ def main():
             print("\nSearching product")
             search_id = input("Enter product ID: ")
             found_product = inventory.search_product(search_id)
+            print(found_product)
 
         elif choice == "5":
             print("\nSaving inventory")
