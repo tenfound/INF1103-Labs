@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 class Product():
     def __init__(self, product_id: str, name: str, price: float, stock: int):
         self.__productid = product_id
@@ -40,6 +41,10 @@ class Product():
     def display_information(self):
         return(f"Product ID: {self.__productid}, Product Name: {self.__name}, Price: ${self.__price}, Stock: {self.__stock}")
 
-    def __str__(self):      # Enables user to read actual values when printing class
-        return (f"Product ID: {self.__productid}, Product Name: {self.__name}, Price: ${self.__price}, Stock: {self.__stock}")
+    # def __str__(self):      # Enables user to read actual values when printing class
+    #     return (f"Product ID: {self.__productid}, Product Name: {self.__name}, Price: ${self.__price}, Stock: {self.__stock}")
+
+    @abstractmethod
+    def get_fulfillent_info():
+        pass
     

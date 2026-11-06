@@ -5,7 +5,8 @@ class Digital_Product(Product):
         self.__download_size = download_size
 
     def get_download_size(self):
-        return self.__download_size
+        download_size = float(input("Product Download Size: "))
+        return download_size
 
     def display_information(self):
         super().display_information()
@@ -25,3 +26,6 @@ class Digital_Product(Product):
             item["Stock"],
             item["Download Size"]
         )
+
+    def get_fulfillment_info(self):
+            return (f"Product requires physical shipping")

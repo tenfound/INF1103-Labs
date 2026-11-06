@@ -1,6 +1,9 @@
-from class_PhysicalProduct import PhysicalProduct
-from class_DigitalProduct import DigitalProduct
+from class_Physical_Product import Physical_Product
+from class_Digital_Product import Digital_Product
+from class_Product import Product
 from class_Inventory import Inventory
+
+
 def main():
     inventory = Inventory()
     # product = Product()
@@ -21,11 +24,24 @@ def main():
             inventory.display_all()
 
         elif choice == "2":
-            print("\nAdding new product")
+            print("\nAdding new product\n")
+            print("1. Physical Product")
+            print("2. Digital Product")
+            product_type = input("Enter product type (1 or 2): ")
             id, name = Product.get_name()
             price = Product.get_price()
             stock = Product.get_stock()
-            product = Product(id, name, price, stock)
+            weight = Product.get_weight()
+            if product_type == "1":
+                product = Physical_Product(id, name, price, stock, weight)
+
+            elif product_type == "2":
+                download_size = Digital_Product.get_download_size()
+                product = Digital_Product(id, name, price, stock, download_size)
+
+            else:
+                print("Invalid product type. Please try again.")
+                continue
 
             print("Product added successfully!\n")
 
