@@ -5,13 +5,13 @@ class Physical_Product(Product, CanBeShipped):
         super().__init__(product_id, name, price, stock)
         self.__weight = weight
 
-    def get_weight(self):
+    def get_weight():
         weight = float(input("Product Weight: "))
         return weight
 
     def display_information(self):
-        super().display_information()
-        print(f"Weight: {self.__weight}")
+        return super().display_information() + f", Weight: {self.__weight}"
+        # return print(f"Weight: {self.__weight}")
 
     def to_dict(self):
         data = super().to_dict()
@@ -29,8 +29,10 @@ class Physical_Product(Product, CanBeShipped):
         )
 
     def get_fulfillment_info(self):
-        return (f"Product requires physical shipping")
-        
+        shipping_cost = self.calculate_shipping_cost()
+        return (f"Product requires physical shipping, shipping cost: ${shipping_cost:.2f}")
+
     def calculate_shipping_cost(self):
-        shipping_cost = self.__weight * 0.5
-        return shipping_cost
+        cost = (self.__weight % 2) * 2 
+        # return self.__weight * 0.5
+        return cost

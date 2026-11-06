@@ -9,8 +9,7 @@ class Digital_Product(Product):
         return download_size
 
     def display_information(self):
-        super().display_information()
-        print(f"Download Size: {self.__download_size}")
+        return super().display_information() + f", Download Size: {self.__download_size} MB"
 
     def to_dict(self):
         data = super().to_dict()
@@ -28,4 +27,4 @@ class Digital_Product(Product):
         )
 
     def get_fulfillment_info(self):
-            return (f"Product requires physical shipping")
+            return (f"Product does not require physical shipping, download size: {self.__download_size} MB")

@@ -24,24 +24,28 @@ def main():
             inventory.display_all()
 
         elif choice == "2":
-            print("\nAdding new product\n")
+            print("\nAdding new product")
             print("1. Physical Product")
             print("2. Digital Product")
             product_type = input("Enter product type (1 or 2): ")
             id, name = Product.get_name()
             price = Product.get_price()
             stock = Product.get_stock()
-            weight = Product.get_weight()
+            weight = Physical_Product.get_weight()
             if product_type == "1":
-                product = Physical_Product(id, name, price, stock, weight)
+                product = Physical_Product(id, name, price, stock, weight)                
+                print("\nProduct Information: " + product.display_information())
+                print(product.get_fulfillment_info())
 
             elif product_type == "2":
                 download_size = Digital_Product.get_download_size()
                 product = Digital_Product(id, name, price, stock, download_size)
+                print("\nProduct Information: " + product.display_information())
+                print(product.get_fulfillment_info())
 
             else:
                 print("Invalid product type. Please try again.")
-                continue
+                break
 
             print("Product added successfully!\n")
 
