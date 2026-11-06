@@ -30,7 +30,7 @@ class Physical_Product(Product, CanBeShipped):
 
     def get_fulfillment_info(self):
         shipping_cost = self.calculate_shipping_cost()
-        return (f"Product requires physical shipping, shipping cost: ${shipping_cost:.2f}")
+        return (f"Product requires physical shipping, shipping cost per kg: ${shipping_cost:.2f}")
 
     def calculate_shipping_cost(self):
         cost = (self.__weight % 2) * 2 

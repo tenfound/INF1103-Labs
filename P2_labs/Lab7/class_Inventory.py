@@ -28,6 +28,7 @@ class Inventory():
             print(p)
 
     def save_inventory(self):
+        # for product in self.__products:
         with open("inventory2.json", "w") as f:
                 json.dump([x.to_dict() for x in self.__products], f, indent=4)
 

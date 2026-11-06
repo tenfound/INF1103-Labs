@@ -1,20 +1,9 @@
 [
     {
-        "ID": "100",
-        "Name": "Teapot",
-        "Price": "150",
-        "Stock": "2"
-    },
-    {
-        "ID": "101",
-        "Name": "Plate",
-        "Price": "2.50",
-        "Stock": "5"
-    },
-    {
-        "ID": "102",
-        "Name": "Cup",
-        "Price": "1.10",
-        "Stock": "10"
+        "ID": "109",
+        "Name": "Mega File",
+        "Price": "2.30",
+        "Stock": "2",
+        "Download Size": 1230.0
     }
 ]

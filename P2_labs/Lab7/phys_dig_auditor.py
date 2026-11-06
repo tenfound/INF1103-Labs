@@ -3,7 +3,6 @@ from class_Digital_Product import Digital_Product
 from class_Product import Product
 from class_Inventory import Inventory
 
-
 def main():
     inventory = Inventory()
     # product = Product()
@@ -15,9 +14,8 @@ def main():
         print("4. Search product")  # Search for product id in inventory2.json
         print("5. Save inventory")  # Write to json
         print("6. Exit")
-        
-        choice = input("Enter your choice: ")
 
+        choice = input("Enter your choice: ")
         if choice == "1":
             print("\nCurrent Inventory")
             print("=================")
@@ -31,8 +29,9 @@ def main():
             id, name = Product.get_name()
             price = Product.get_price()
             stock = Product.get_stock()
-            weight = Physical_Product.get_weight()
+            
             if product_type == "1":
+                weight = Physical_Product.get_weight()
                 product = Physical_Product(id, name, price, stock, weight)                
                 print("\nProduct Information: " + product.display_information())
                 print(product.get_fulfillment_info())
