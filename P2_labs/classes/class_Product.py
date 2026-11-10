@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
-class Product():
-    def __init__(self, product_id: str, name: str, price: float, stock: int):
+from P2_labs.classes.Supplier import Supplier
+class Product(ABC):
+    def __init__(self, product_id: str, name: str, price: float, stock: int, supplier: Supplier):
         self.__productid = product_id
         self.__name = name
         self.__price = price
         self.__stock = stock
+        self.__supplier: Supplier = supplier
         
     def get_name():
         product_id = input("Prodcut ID: ")

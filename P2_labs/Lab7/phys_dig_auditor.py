@@ -1,7 +1,7 @@
-from class_Physical_Product import Physical_Product
-from class_Digital_Product import Digital_Product
-from class_Product import Product
-from class_Inventory import Inventory
+from P2_labs.classes.class_Physical_Product import Physical_Product
+from P2_labs.classes.class_Digital_Product import Digital_Product
+from P2_labs.classes.class_Product import Product
+from P2_labs.classes.class_Inventory import Inventory
 
 def main():
     inventory = Inventory()
