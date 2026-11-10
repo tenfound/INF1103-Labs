@@ -1,17 +1,26 @@
 import json
-from class_Product import Product
+from P2_labs.classes.class_Product import Product
 class Inventory():
     def __init__(self):
-        self.__products = []
-        self.__past_products = []
+        self.__products: list[Product] = []
+        self.__past_products: list[Product] = []
 
     def load_inventory(self):
         with open("inventory2.json", "r") as f:
             loaded_inventory = json.load(f)
         return loaded_inventory
-    
-    def add_product(self, product):
+
+    def add_product(self, product: Product):
         self.__products.append(product)
+
+    def remove_product(self, product: Product):
+        remove_product = self.search_product(product.get_product_id())
+        for p in self.__products:
+            if p.get_product_id() == remove_product.get_product_id():
+                self.__products.pop(self.__products.index(p))
+                print(f"Product {remove_product.get_product_id()} removed from inventory.")
+        else:
+            print("Product not found in inventory.")
         
     def search_product(self, searched_product_id):
         data = self.load_inventory()
